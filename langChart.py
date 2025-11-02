@@ -116,7 +116,7 @@ absolute_url = f"https://raw.githubusercontent.com/{username}/LangReflect/main/l
 
 # Write snippet to file
 # Markdown snippet users can copy
-snippet = f"![LangReflect Chart]({absolute_url})\n\n *Chart updates automatically each month via [LangReflect](https://github.com/{username}/LangReflect).*"
+snippet = f"`![LangReflect Chart]({absolute_url})\n\n *Chart updates automatically each month via [LangReflect](https://github.com/{username}/LangReflect).*`"
 
 with open("chart_snippet.md", "w") as f:
     f.write(snippet)
