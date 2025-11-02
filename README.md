@@ -25,7 +25,8 @@ The project leverages **GitHub Actions** and **PyGithub** to automate `.gitattri
 - Detects and supports both `main`, `master`, or custom default branches  
 - Secure GitHub authentication via `.env` and GitHub Secrets  
 - Lightweight setup using Python virtual environments  
-- Ensures accurate GitHub language statistics    
+- Ensures accurate GitHub language statistics   
+- Generates and commits a **visual chart (`langreflect_chart.png`)** showing your real language usage   
 - Commits `update_log.txt` back to the repo for traceability  
 - Runs on a monthly schedule or manually via GitHub Actions  
 
@@ -40,7 +41,8 @@ The project leverages **GitHub Actions** and **PyGithub** to automate `.gitattri
    - Checks for an existing `.gitattributes` file  
    - Creates or updates it with standardized language classification rules  
 4. Logs every action (created, updated, skipped, or failed) in `update_log.txt`.  
-5. The **GitHub Actions** workflow commits this log
+5. The **chart generator script (`langChart.py`)** aggregates all language data and generates a visual bar chart (`langreflect_chart.png`) in GitHub Readme Stats style.  
+6. Both the `.gitattributes` log and chart are automatically committed back to the repository through **GitHub Actions**.
 
 ---
 
@@ -51,6 +53,7 @@ The project leverages **GitHub Actions** and **PyGithub** to automate `.gitattri
 | **Python 3.11** | Core runtime |
 | **PyGithub** | GitHub API interaction |
 | **python-dotenv** | Secure environment variable loading |
+| **Matplotlib** | Generates the language usage chart |
 | **GitHub Actions** | CI/CD automation |
 
 ---
@@ -82,9 +85,10 @@ GITHUB_TOKEN=your_personal_access_token_here
 ```
 > The token must have `repo` and `workflow` scopes.
 
-#### 5. Run the automation locally
+#### 5. Run the scripts locally
 ```bash
 python langReflect.py
+python langChart.py
 ```
 
 ---
@@ -97,8 +101,8 @@ It:
 - Sets up Python and a virtual environment  
 - Installs dependencies from `requirements.txt`  
 - Loads secrets dynamically from GitHub Secrets  
-- Runs the script  
-- Commits and pushes the log file back to the repo 
+- Runs both automation scripts (langReflect.py and langChart.py)
+- Commits and pushes the log file and chart image back to the repository
 
 #### Required GitHub Secrets
 
@@ -115,16 +119,19 @@ By default, the workflow runs **automatically at 09:00 UTC on the 1st of every m
 ### Project Structure
 
 ```
-gitattributes_automation/
+LangReflect/
 │
-├── gitattribute_automate.py       # Main automation script
+├── langReflect.py                # Main automation script
+├── langChart.py                  # Generates the language usage chart
 ├── .github/
 │   └── workflows/
 │       └── cicd.yaml             # GitHub Actions workflow
 ├── requirements.txt              # Python dependencies
 ├── .env                          # Environment variables (not committed)
 ├── update_log.txt                # Generated log per run
+├── langreflect_chart.png         # Auto-generated language chart
 └── README.md                     # Project documentation
+
 ```
 
 ---

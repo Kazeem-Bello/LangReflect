@@ -57,4 +57,17 @@ jobs:
           else
             echo "No update_log.txt found, skipping commit."
           fi
+      # Step 6: Generate Chart
+      - name: Generate LangReflect Chart
+        run: |
+          python langreflect_chart.py
+
+      - name: Commit chart to repo
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add langreflect_chart.png
+          git commit -m "Auto-update LangReflect chart"
+          git push https://$GITHUB_TOKEN@github.com/${{ github.repository }}.git HEAD:${{ github.ref_name }}
+
 
