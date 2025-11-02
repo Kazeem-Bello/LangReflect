@@ -33,7 +33,7 @@ The project leverages **GitHub Actions** and **PyGithub** to automate `.gitattri
 
 ### How It Works
 
-1. The Python script (`gitattribute_automate.py`) connects to your GitHub account using the [PyGithub](https://github.com/PyGithub/PyGithub) API.  
+1. The Python script (`langReflect.py`) connects to your GitHub account using the [PyGithub](https://github.com/PyGithub/PyGithub) API.  
 2. It loops through all your repositories.  
 3. For each repo, it:
    - Detects the default branch (`main`, `master`, or custom)
@@ -59,8 +59,8 @@ The project leverages **GitHub Actions** and **PyGithub** to automate `.gitattri
 
 #### 1. Clone the repository
 ```bash
-git clone https://github.com/Kazeem-Bello/gitattributes_automation.git
-cd gitattributes_automation
+git clone https://github.com/Kazeem-Bello/LangReflect.git
+cd LangReflect
 ```
 
 #### 2. Create and activate a virtual environment
@@ -84,7 +84,7 @@ GITHUB_TOKEN=your_personal_access_token_here
 
 #### 5. Run the automation locally
 ```bash
-python gitattribute_automate.py
+python langReflect.py
 ```
 
 ---

@@ -110,7 +110,7 @@ plt.savefig(output_path)
 print(f"Chart saved as {output_path}")
 
 # Generate a markdown snippet for README
-snippet = f"![LangReflect Chart](./{output_path})"
+snippet = f"`![LangReflect Chart](./{output_path})`"
 with open("chart_snippet.md", "w") as f:
     f.write(snippet)
 print("Markdown snippet generated: chart_snippet.md")
