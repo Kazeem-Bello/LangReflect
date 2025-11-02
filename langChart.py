@@ -110,7 +110,14 @@ plt.savefig(output_path)
 print(f"Chart saved as {output_path}")
 
 # Generate a markdown snippet for README
-snippet = f"`![LangReflect Chart](./{output_path})`"
+
+# Construct absolute image URL
+absolute_url = f"https://raw.githubusercontent.com/{username}/LangReflect/main/langreflect_chart.png"
+
+# Write snippet to file
+# Markdown snippet users can copy
+snippet = f"![LangReflect Chart]({absolute_url})\n\n *Chart updates automatically each month via [LangReflect](https://github.com/{username}/LangReflect).*"
+
 with open("chart_snippet.md", "w") as f:
     f.write(snippet)
 print("Markdown snippet generated: chart_snippet.md")
