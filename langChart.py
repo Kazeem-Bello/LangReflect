@@ -34,29 +34,28 @@ total = sum(language_data.values())
 languages = list(language_data.keys())
 percentages = [round((size / total) * 100, 2) for size in language_data.values()]
 
+percentages = [str(i) + "%" for i in percentages]
 
 # Limit to top 6 for readability
 languages = languages[:6]
 percentages = percentages[:6]
-# Chart style
+
+# Plotting the Chart
 fig, ax = plt.subplots(figsize=(6, 2.5))
 fig.patch.set_facecolor("#1a1b27")  # GitHub dark background
 ax.set_facecolor("#1a1b27")
 ax.set_xlim(0, 1)
 ax.set_ylim(0, 1)
 ax.axis("off")
+for spine in ax.spines.values():
+    spine.set_visible(False)
 
-# Colors for the dots and bars 
-colors = ["#f00ca8", "#3572A5", "#f1e05a", "#563d7c", "#384d54", "#ff9900"]
+# Colors for the circles 
+colors = ["#3572A5", "#f00ca8", "#f1e05a", "#563d7c", "#384d54", "#ff9900"]
 
 # Title 
 ax.text(0.05, 1.05, "Most Used Languages", fontsize=18, color="#70a5fe", fontweight="bold")
 ax.text(0.7, 0, "Powered By LangReflect", fontsize=6, color= "#70a5fe", fontweight="bold")
-
-
-
-for spine in ax.spines.values():
-    spine.set_visible(False)
 
 l_offset = 0
 r_offset = 0
