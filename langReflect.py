@@ -8,7 +8,7 @@ load_dotenv()
 #  CONFIGURATION 
 GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
 
-file_content = """# --- LANGUAGE CLASSIFICATION FIXES ---
+file_content = """# LANGUAGE CLASSIFICATION FIXES
 *.ipynb linguist-language=Python
 *.py linguist-language=Python
 **/*.ipynb linguist-language=Python
