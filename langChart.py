@@ -76,7 +76,7 @@ for i, (lang, perc) in enumerate(zip(languages, percentages)):
         inv = ax.transData.inverted()
         bbox_data = bbox.transformed(inv)
 
-        num = ax.text(bbox_data.x1 + p_offset, v_start + l_offset, perc, fontsize=12, color= "#38b9ab", fontweight="bold")
+        value = ax.text(bbox_data.x1 + p_offset, v_start + l_offset, perc, fontsize=12, color= "#38b9ab", fontweight="bold")
         circle = ax.scatter(0.06, v_start + 0.04 + l_offset, color= colors[i], s=120) 
         l_offset -= 0.2
 
@@ -93,7 +93,7 @@ for i, (lang, perc) in enumerate(zip(languages, percentages)):
         inv = ax.transData.inverted()
         bbox_data = bbox.transformed(inv)
 
-        num = ax.text(bbox_data.x1 + p_offset, v_start + r_offset, perc, fontsize=12, color= "#38b9ab", fontweight="bold")
+        value = ax.text(bbox_data.x1 + p_offset, v_start + r_offset, perc, fontsize=12, color= "#38b9ab", fontweight="bold")
         circle = ax.scatter(0.56, v_start + 0.04 + r_offset, color= colors[i], s=120) 
         r_offset -= 0.2
 
@@ -113,7 +113,6 @@ print(f"Chart saved as {output_path}")
 # Construct absolute image URL
 absolute_url = f"https://raw.githubusercontent.com/{username}/LangReflect/main/langreflect_chart.png"
 
-# Write snippet to file
 # Markdown snippet users can copy
 snippet = f"`![LangReflect Chart]({absolute_url})`\n\n `*Chart updates automatically each month via [LangReflect](https://github.com/{username}/LangReflect).*`"
 

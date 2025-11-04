@@ -35,11 +35,11 @@ jobs:
         run: |
           echo "GITHUB_TOKEN=${{ secrets.PERSONAL_GITHUB_TOKEN }}" >> .env
 
-      # Step 5: Run your updater script (loads .env automatically)
-      - name: Run the .gitattributes updater
+      # Step 5: Run your updater script 
+      - name: Run the LangReflect script
         run: |
           source venv/bin/activate
-          python gitattribute_automate.py
+          python langReflect.py
 
       # Step 6: Commit and push the log file
       - name: Commit and push update log
@@ -57,17 +57,28 @@ jobs:
           else
             echo "No update_log.txt found, skipping commit."
           fi
-      # Step 6: Generate Chart
+
+      # Step 7: Generate LangReflect Chart
       - name: Generate LangReflect Chart
         run: |
-          python langreflect_chart.py
+          source venv/bin/activate
+          python langChart.py
 
-      - name: Commit chart to repo
+      # Step 8: Commit and push chart to repo
+      - name: Commit LangReflect Chart
+        env:
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_GITHUB_TOKEN }}
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add langreflect_chart.png
-          git commit -m "Auto-update LangReflect chart"
-          git push https://$GITHUB_TOKEN@github.com/${{ github.repository }}.git HEAD:${{ github.ref_name }}
+          if [ -f langreflect_chart.png ]; then
+            echo "Committing updated LangReflect chart..."
+            git config --global user.name "github-actions[bot]"
+            git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add langreflect_chart.png chart_snippet.md || true
+            git commit -m "Auto-update LangReflect chart - $(date -u '+%Y-%m-%d %H:%M:%S') UTC" || echo "No changes to commit"
+            DEFAULT_BRANCH=$(git remote show origin | grep "HEAD branch" | awk '{print $NF}')
+            git push https://$GITHUB_TOKEN@github.com/${{ github.repository }}.git HEAD:$DEFAULT_BRANCH
+          else
+            echo "No langreflect_chart.png found, skipping chart commit."
+          fi
 
 
